@@ -8,4 +8,9 @@ Last Updated: <%= post.updated_at %><br>
 <% post.links.each do |link| %>
   <a href="<%= link.url %>"><br>
 <% end %>
+<% if current_user.id == post.user_id %>
+  <form action="<%= edit_post_url(post) %>">
+    <input type="submit">Edit<input>
+  </form>
+<% end %>
 <article>
