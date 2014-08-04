@@ -1,0 +1,9 @@
+<% @circles.each do |circle| %>
+  <a href="<%= circle_url(circle) %>"><%= circle.name %></a>
+  <br>
+<% end %>
+
+
+<form>
+  <button formaction="<%=new_circle_url%>">New Circle</button>
+</form>

@@ -1,0 +1,49 @@
+<% action = (post.persisted? ? post_url(post) : posts_url) %>
+<% method = (post.persisted? ? "PUT" : "POST") %>
+<% message = (post.persisted? ? "Update" : "Submit") %>
+
+
+<form action="<%= action %>" method="POST">
+  <input
+    name="_method"
+    type="hidden"
+    value="<%= method %>">
+  <br>
+  <input
+    name="post[user_id]"
+    type="hidden",
+    value="<%= current_user.id %>">
+  <textarea name="post[body]"><%= post.body %></textarea>
+  <br>
+
+  <li>
+    <label for="link1">Link</label>
+    <input id="link1" name="post[link_urls][0]" type="text">
+  </li>
+  <li>
+    <label for="link2">Link</label>
+    <input id="link2" name="post[link_urls][1]" type="text">
+  </li>
+  <li>
+    <label for="link3">Link</label>
+    <input id="link3" name="post[link_urls][2]" type="text">
+  </li>
+
+  <% if method == "POST" %>
+  Send To:
+  <br>
+    <% Circle.all.each do |circle| %>
+    <input
+      type="checkbox"
+      name="post[circle_ids][]"
+      value="<%= circle.id %>"> <%= circle.name %>
+      <br>
+    <% end %>
+  <% end %>
+
+  <input type="submit" value="<%= message %>">
+  <button
+    formaction="<%= user_url(current_user) %>"
+    formmethod="GET"> Cancel
+  </button>
+</form>

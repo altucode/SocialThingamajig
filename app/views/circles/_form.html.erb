@@ -1,0 +1,36 @@
+<% action = (circle.persisted? ? circle_url(circle) : circles_url) %>
+<% method = (circle.persisted? ? "PUT" : "POST") %>
+<% message = (circle.persisted? ? "Update circle" : "Create circle") %>
+
+
+<form action="<%= action %>" method="POST">
+  <input
+    name="_method"
+    type="hidden"
+    value="<%= method %>">
+  <label for="circle_name">Circle Name</label>
+  <input
+    id="circle_name",
+    name="circle[name]",
+    value="<%= circle.name %>",
+    type="text">
+  <br>
+  <input
+    name="circle[owner_id]",
+    value="<%= current_user.id %>"
+    type="hidden">
+  <br>
+  <input type="hidden" name="circle[user_ids][]" value="">
+  <% User.all.each do |user| %>
+    <% if user.id != current_user.id %>
+      <input
+        type="checkbox"
+        name="circle[user_ids][]"
+        value="<%= user.id %>"
+        <%= circle.user_ids.include?(user.id) ? "checked" : "" %> > <%= user.email %>
+        <br>
+      <% end %>
+  <%end%>
+
+  <input type="submit" value="<%= message %>">
+</form>

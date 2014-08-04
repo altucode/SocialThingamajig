@@ -1,0 +1,11 @@
+<article>
+<h3><%= post.user.email %>:</h3>
+<p><%= post.body %></p>
+<br>
+Post Date: <%= post.created_at %><br>
+Last Updated: <%= post.updated_at %><br>
+<br>
+<% post.links.each do |link| %>
+  <a href="<%= link.url %>"><br>
+<% end %>
+<article>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SocialThingamajig</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% if !current_user.nil? %>
+  <ul>
+    <li>Logged in as: <%= current_user.email %></li>
+    <li>
+      <form>
+        <button formaction="<%= feed_url %>">Feed</button>
+        <button formaction="<%= user_url(current_user) %>">Profile</button>
+        <button
+          formaction="<%= session_url %>"
+          formmethod="delete">
+          Logout
+        </button>
+      </form>
+    </i>
+  </ul>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+<h1><%= @user.email %></h1>
+
+<a href="<%=user_circles_url(@user)%>">Your Circles</a>
+<br>
+<br>
+<form>
+  <button formaction="<%=new_circle_url%>">New Circle</button>
+  <button formaction="<%=new_post_url%>">New Post</button>
+</form>
